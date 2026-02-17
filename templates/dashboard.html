@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard | Campus Resource Hub</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            background-color: #f8f9fb;
+            color: #1a1a1a;
+            overflow-x: hidden;
+        }
+
+        /* SOFT BACKGROUND IMAGE */
+        .background-image {
+
+            position: fixed;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 100%;
+
+            background-image: url("https://images.unsplash.com/photo-1522202176988-66273c2fd55f");
+
+            background-size: cover;
+            background-position: center;
+
+            opacity: 0.08;
+
+            z-index: -1;
+        }
+
+        /* Top Blue Bar */
+        .topbar {
+            background-color: #0b3d91;
+            color: white;
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .topbar-title {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .logout-btn {
+            margin-left: 20px;
+            padding: 8px 18px;
+            background-color: white;
+            color: #0b3d91;
+            border: none;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .container {
+            padding: 50px 80px;
+        }
+
+        .dashboard-title {
+            font-size: 28px;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .menu {
+            width: 300px;
+        }
+
+        .menu-item {
+            margin-bottom: 18px;
+        }
+
+        .menu-item a {
+
+            display: block;
+            background-color: #0b3d91;
+            color: white;
+
+            padding: 14px 20px;
+
+            text-decoration: none;
+
+            border-radius: 6px;
+
+            font-size: 16px;
+
+            font-weight: 500;
+        }
+
+        .menu-item a:hover {
+            background-color: #082c6c;
+        }
+
+        .search-box {
+            margin-top: 40px;
+        }
+
+        .search-box input {
+
+            padding: 12px;
+            width: 260px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .search-box button {
+
+            padding: 12px 18px;
+            background-color: #0b3d91;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Background -->
+    <div class="background-image"></div>
+
+
+    <!-- Top Bar -->
+    <div class="topbar">
+
+        <div class="topbar-title">
+            Campus Resource Hub
+        </div>
+
+        <div>
+            Welcome, {{ session.username }}
+
+            <a href="/logout">
+                <button class="logout-btn">Logout</button>
+            </a>
+        </div>
+
+    </div>
+
+
+    <!-- Main Content -->
+    <div class="container">
+
+        <div class="dashboard-title">
+            Dashboard
+        </div>
+
+        <div class="menu">
+
+            <div class="menu-item">
+                <a href="/upload">Upload Notes</a>
+            </div>
+
+            <div class="menu-item">
+                <a href="/view">View Notes</a>
+            </div>
+
+        </div>
+
+
+        <div class="search-box">
+
+            <form action="/search" method="GET">
+
+                <input type="text" name="query" placeholder="Search notes">
+
+                <button type="submit">Search</button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

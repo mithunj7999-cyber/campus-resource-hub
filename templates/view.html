@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Notes</title>
+</head>
+<body>
+
+<h2>Available Notes</h2>
+<form action="/search" method="GET">
+
+<input type="text" name="query" placeholder="Search by title or subject" required>
+
+<button type="submit">Search</button>
+
+</form>
+
+<br>
+
+<table border="1">
+
+<tr>
+    <th>Title</th>
+    <th>Subject</th>
+    <th>File</th>
+    <th>Uploaded By</th>
+    <th>Upload Time</th>
+    <th>Download</th>
+</tr>
+
+{% for note in notes %}
+
+<tr>
+
+<td>{{ note[1] }}</td>
+
+<td>{{ note[2] }}</td>
+
+<td>{{ note[3] }}</td>
+
+<td>{{ note[5] }}</td>
+
+<td>{{ note[6] }}</td>
+
+<td>
+<a href="/download/{{ note[4] }}">Download</a>
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+<br>
+<a href="/">Home</a>
+
+</body>
+</html>
