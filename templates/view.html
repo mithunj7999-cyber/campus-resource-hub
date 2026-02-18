@@ -1,58 +1,191 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>View Notes</title>
+    <title>Vault. | View Notes</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=Syne:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --deep-blue: #00246B;
+            --sky-blue: #CADCFC;
+            --glass-bg: rgba(202, 220, 252, 0.2); 
+            --glass-border: rgba(202, 220, 252, 0.4);
+            --accent: #FF5E6C;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffffff 0%, #f0f4ff 100%);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Top header bar */
+        .header {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--glass-border);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 2rem;
+            color: var(--deep-blue);
+            margin: 0;
+            letter-spacing: -1px;
+        }
+
+        .brand-title span { color: var(--accent); }
+
+        .welcome {
+            font-size: 1rem;
+            color: var(--deep-blue);
+            font-weight: 600;
+        }
+
+        /* Main content card */
+        .view-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            padding: 2rem;
+            border-radius: 25px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            margin: 40px;
+        }
+
+        h2 {
+            color: var(--deep-blue);
+            margin-bottom: 20px;
+        }
+
+        .search-box {
+            margin-bottom: 20px;
+        }
+
+        .search-box input {
+            padding: 12px;
+            width: 60%;
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            outline: none;
+        }
+
+        .search-box button {
+            padding: 12px 20px;
+            background: var(--deep-blue);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            margin-left: 10px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .search-box button:hover {
+            background: var(--sky-blue);
+            color: var(--deep-blue);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: rgba(255,255,255,0.6);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        th {
+            background: var(--deep-blue);
+            color: white;
+        }
+
+        tr:hover {
+            background: rgba(202,220,252,0.3);
+        }
+
+        a {
+            color: var(--deep-blue);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: var(--accent);
+        }
+
+        .links {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .links a {
+            color: var(--deep-blue);
+            text-decoration: none;
+            font-weight: 600;
+            margin: 0 10px;
+        }
+    </style>
 </head>
 <body>
 
-<h2>Available Notes</h2>
-<form action="/search" method="GET">
+    <!-- Header -->
+    <div class="header">
+        <h1 class="brand-title">Vault<span>.</span></h1>
+        <span class="welcome">Welcome, {{ session.username }}</span>
+    </div>
 
-<input type="text" name="query" placeholder="Search by title or subject" required>
+    <!-- Notes Section -->
+    <div class="view-card">
+        <h2>Available Notes</h2>
 
-<button type="submit">Search</button>
+        <div class="search-box">
+            <form action="/search" method="GET">
+                <input type="text" name="query" placeholder="Search by title or subject" required>
+                <button type="submit">Search</button>
+            </form>
+        </div>
 
-</form>
+        <table>
+            <tr>
+                <th>Title</th>
+                <th>Subject</th>
+                <th>File</th>
+                <th>Uploaded By</th>
+                <th>Upload Time</th>
+                <th>Download</th>
+            </tr>
 
-<br>
+            {% for note in notes %}
+            <tr>
+                <td>{{ note[1] }}</td>
+                <td>{{ note[2] }}</td>
+                <td>{{ note[3] }}</td>
+                <td>{{ note[5] }}</td>
+                <td>{{ note[6] }}</td>
+                <td><a href="/download/{{ note[4] }}">Download</a></td>
+            </tr>
+            {% endfor %}
+        </table>
 
-<table border="1">
-
-<tr>
-    <th>Title</th>
-    <th>Subject</th>
-    <th>File</th>
-    <th>Uploaded By</th>
-    <th>Upload Time</th>
-    <th>Download</th>
-</tr>
-
-{% for note in notes %}
-
-<tr>
-
-<td>{{ note[1] }}</td>
-
-<td>{{ note[2] }}</td>
-
-<td>{{ note[3] }}</td>
-
-<td>{{ note[5] }}</td>
-
-<td>{{ note[6] }}</td>
-
-<td>
-<a href="/download/{{ note[4] }}">Download</a>
-</td>
-
-</tr>
-
-{% endfor %}
-
-</table>
-
-<br>
-<a href="/">Home</a>
+        <div class="links">
+            <a href="/">Back to Dashboard</a>
+            <a href="/upload">Upload Notes</a>
+        </div>
+    </div>
 
 </body>
 </html>

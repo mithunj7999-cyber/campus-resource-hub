@@ -1,26 +1,121 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Signup</title>
+    <title>Vault. | Sign Up</title>
+    <!-- Corrected Google Fonts Link -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=Syne:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --deep-blue: #00246B;
+            --sky-blue: #CADCFC;
+            --glass-bg: rgba(202, 220, 252, 0.2); 
+            --glass-border: rgba(202, 220, 252, 0.4);
+            --accent: #FF5E6C;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffffff 0%, #f0f4ff 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .signup-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            padding: 3rem;
+            border-radius: 30px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            width: 350px;
+        }
+
+        .brand-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 3.5rem;
+            color: var(--deep-blue);
+            margin: 0;
+            letter-spacing: -2px;
+        }
+
+        .brand-title span { color: var(--accent); }
+
+        .tagline {
+            color: var(--deep-blue);
+            opacity: 0.6;
+            font-size: 0.8rem;
+            margin-bottom: 2rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+            background: rgba(255, 255, 255, 0.6);
+            box-sizing: border-box;
+            font-family: inherit;
+            outline: none;
+            transition: 0.3s ease;
+        }
+
+        input:focus { border-color: var(--deep-blue); background: white; }
+
+        .btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            background: var(--deep-blue);
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .btn:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 10px 20px rgba(0, 36, 107, 0.15); 
+        }
+
+        .links {
+            margin-top: 20px;
+            font-size: 0.85rem;
+        }
+
+        .links a {
+            color: var(--deep-blue);
+            text-decoration: none;
+            font-weight: 600;
+        }
+    </style>
 </head>
 <body>
 
-<h2>Signup</h2>
+<div class="signup-card">
+    <h1 class="brand-title">Vault<span>.</span></h1>
+    <p class="tagline">Campus Resource Hub</p>
+    
+    <form action="/signup" method="POST">
+        <input type="text" name="username" placeholder="Choose a Username" required>
+        <input type="password" name="password" placeholder="Create a Password" required>
+        <button type="submit" class="btn">Join the Vault</button>
+    </form>
 
-<form method="POST">
-
-    Username:<br>
-    <input type="text" name="username" required><br><br>
-
-    Password:<br>
-    <input type="password" name="password" required><br><br>
-
-    <button type="submit">Signup</button>
-
-</form>
-
-<br>
-<a href="/">Home</a>
+    <div class="links">
+        Already have an account? <a href="/login">Login</a>
+    </div>
+</div>
 
 </body>
 </html>

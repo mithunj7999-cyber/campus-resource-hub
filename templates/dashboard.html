@@ -1,190 +1,155 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Dashboard | Campus Resource Hub</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-
+    <title>Vault. | Dashboard</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=Syne:wght@700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --deep-blue: #00246B;
+            --sky-blue: #CADCFC;
+            --glass-bg: rgba(202, 220, 252, 0.2); 
+            --glass-border: rgba(202, 220, 252, 0.4);
+            --accent: #FF5E6C;
+        }
 
         body {
-            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #ffffff 0%, #f0f4ff 100%);
+            font-family: 'Plus Jakarta Sans', sans-serif;
             margin: 0;
-            background-color: #f8f9fb;
-            color: #1a1a1a;
-            overflow-x: hidden;
+            padding: 40px;
         }
 
-        /* SOFT BACKGROUND IMAGE */
-        .background-image {
-
-            position: fixed;
-
-            top: 0;
-            left: 0;
-
-            width: 100%;
-            height: 100%;
-
-            background-image: url("https://images.unsplash.com/photo-1522202176988-66273c2fd55f");
-
-            background-size: cover;
-            background-position: center;
-
-            opacity: 0.08;
-
-            z-index: -1;
+        .dashboard-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            padding: 3rem;
+            border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            max-width: 900px;
+            margin: auto;
         }
 
-        /* Top Blue Bar */
-        .topbar {
-            background-color: #0b3d91;
-            color: white;
-            padding: 18px 40px;
+        .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border-bottom: 2px solid var(--glass-border);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
         }
 
-        .topbar-title {
-            font-size: 20px;
+        .brand-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 2.5rem;
+            color: var(--deep-blue);
+            margin: 0;
+            letter-spacing: -1px;
+        }
+
+        .brand-title span { color: var(--accent); }
+
+        .welcome {
+            font-size: 1rem;
+            color: var(--deep-blue);
             font-weight: 600;
         }
 
         .logout-btn {
-            margin-left: 20px;
-            padding: 8px 18px;
-            background-color: white;
-            color: #0b3d91;
+            background: var(--deep-blue);
+            color: white;
             border: none;
-            font-weight: 500;
+            padding: 10px 20px;
+            border-radius: 12px;
             cursor: pointer;
-            border-radius: 4px;
-        }
-
-        .container {
-            padding: 50px 80px;
-        }
-
-        .dashboard-title {
-            font-size: 28px;
-            margin-bottom: 30px;
             font-weight: 600;
         }
 
+        .logout-btn:hover {
+            background: var(--sky-blue);
+            color: var(--deep-blue);
+        }
+
         .menu {
-            width: 300px;
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
         }
 
-        .menu-item {
-            margin-bottom: 18px;
-        }
-
-        .menu-item a {
-
-            display: block;
-            background-color: #0b3d91;
+        .menu a {
+            flex: 1;
+            text-align: center;
+            background: var(--deep-blue);
             color: white;
-
-            padding: 14px 20px;
-
+            padding: 14px;
+            border-radius: 12px;
             text-decoration: none;
-
-            border-radius: 6px;
-
-            font-size: 16px;
-
-            font-weight: 500;
+            font-weight: 600;
+            transition: 0.3s;
         }
 
-        .menu-item a:hover {
-            background-color: #082c6c;
+        .menu a:hover {
+            background: var(--sky-blue);
+            color: var(--deep-blue);
         }
 
         .search-box {
-            margin-top: 40px;
+            margin-top: 20px;
+            text-align: center;
         }
 
         .search-box input {
-
             padding: 12px;
-            width: 260px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            width: 60%;
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            outline: none;
         }
 
         .search-box button {
-
-            padding: 12px 18px;
-            background-color: #0b3d91;
+            padding: 12px 20px;
+            background: var(--deep-blue);
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 12px;
             margin-left: 10px;
             cursor: pointer;
+            font-weight: 600;
         }
 
+        .search-box button:hover {
+            background: var(--sky-blue);
+            color: var(--deep-blue);
+        }
     </style>
-
 </head>
-
 <body>
 
-    <!-- Background -->
-    <div class="background-image"></div>
-
-
-    <!-- Top Bar -->
-    <div class="topbar">
-
-        <div class="topbar-title">
-            Campus Resource Hub
-        </div>
-
+<div class="dashboard-card">
+    <div class="header">
+        <h1 class="brand-title">Vault<span>.</span></h1>
         <div>
-            Welcome, {{ session.username }}
-
-            <a href="/logout">
-                <button class="logout-btn">Logout</button>
-            </a>
+            <span class="welcome">Welcome, {{ session.username }}</span>
+            <a href="/logout"><button class="logout-btn">Logout</button></a>
         </div>
-
     </div>
 
+    <h2 style="color: var(--deep-blue);">Dashboard</h2>
 
-    <!-- Main Content -->
-    <div class="container">
-
-        <div class="dashboard-title">
-            Dashboard
-        </div>
-
-        <div class="menu">
-
-            <div class="menu-item">
-                <a href="/upload">Upload Notes</a>
-            </div>
-
-            <div class="menu-item">
-                <a href="/view">View Notes</a>
-            </div>
-
-        </div>
-
-
-        <div class="search-box">
-
-            <form action="/search" method="GET">
-
-                <input type="text" name="query" placeholder="Search notes">
-
-                <button type="submit">Search</button>
-
-            </form>
-
-        </div>
-
+    <div class="menu">
+        <a href="/upload">Upload Notes</a>
+        <a href="/view">View Notes</a>
     </div>
+
+    <div class="search-box">
+        <form action="/search" method="GET">
+            <input type="text" name="query" placeholder="Search notes..." required>
+            <button type="submit">Search</button>
+        </form>
+    </div>
+</div>
 
 </body>
 </html>

@@ -1,6 +1,148 @@
-<h2>Upload Notes</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vault. | Upload Notes</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=Syne:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --deep-blue: #00246B;
+            --sky-blue: #CADCFC;
+            --glass-bg: rgba(202, 220, 252, 0.2); 
+            --glass-border: rgba(202, 220, 252, 0.4);
+            --accent: #FF5E6C;
+        }
 
-<form action="/upload" method="POST" enctype="multipart/form-data">
-    <input type="file" name="file" required>
-    <button type="submit">Upload</button>
-</form>
+        body {
+            background: linear-gradient(135deg, #ffffff 0%, #f0f4ff 100%);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Top header bar */
+        .header {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--glass-border);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 2rem;
+            color: var(--deep-blue);
+            margin: 0;
+            letter-spacing: -1px;
+        }
+
+        .brand-title span { color: var(--accent); }
+
+        .welcome {
+            font-size: 1rem;
+            color: var(--deep-blue);
+            font-weight: 600;
+        }
+
+        /* Upload section aligned bottom-left */
+        .upload-section {
+            flex: 1;
+            display: flex;
+            align-items: flex-end;
+            padding: 40px;
+        }
+
+        .upload-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            padding: 2rem;
+            border-radius: 25px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            width: 400px;
+        }
+
+        h2 {
+            color: var(--deep-blue);
+            margin-bottom: 20px;
+        }
+
+        input[type="text"], input[type="file"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+            background: rgba(255, 255, 255, 0.6);
+            box-sizing: border-box;
+            outline: none;
+            transition: 0.3s ease;
+        }
+
+        input:focus { border-color: var(--deep-blue); background: white; }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            background: var(--deep-blue);
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .btn:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 10px 20px rgba(0, 36, 107, 0.15); 
+        }
+
+        .links {
+            margin-top: 20px;
+            font-size: 0.85rem;
+            text-align: center;
+        }
+
+        .links a {
+            color: var(--deep-blue);
+            text-decoration: none;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header with Vault and Username -->
+    <div class="header">
+        <h1 class="brand-title">Vault<span>.</span></h1>
+        <span class="welcome">Welcome, {{ session.username }}</span>
+    </div>
+
+    <!-- Upload form at bottom-left -->
+    <div class="upload-section">
+        <div class="upload-card">
+            <h2>Upload Notes</h2>
+            <form action="/upload" method="POST" enctype="multipart/form-data">
+                <input type="text" name="title" placeholder="Title" required>
+                <input type="text" name="subject" placeholder="Subject" required>
+                <input type="file" name="file" required>
+                <button type="submit" class="btn">Upload</button>
+            </form>
+
+            <div class="links">
+                <a href="/view">View Notes</a> | <a href="/">Back to Dashboard</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
